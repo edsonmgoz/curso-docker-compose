@@ -1,0 +1,20 @@
+---
+title: Docker Compose en profundidad
+description: Dependencias con healthchecks, Compose Watch, límites de recursos, perfiles y archivos de sobreescritura, y organización de proyectos grandes.
+sesion: 5
+sidebar:
+  label: 05 · Compose en profundidad
+  order: 5
+---
+
+import SesionCabecera from '../../../components/SesionCabecera.astro';
+
+<SesionCabecera numero={5} />
+
+## En esta sesión
+
+- Dependencias entre servicios con `depends_on` y healthchecks, para que un servicio no arranque antes de tiempo.
+- Docker Compose Watch: recarga automática durante el desarrollo, sin reconstruir la imagen en cada cambio.
+- Límites básicos de recursos (CPU y memoria) para contenedores.
+- Separación de la configuración por entorno mediante perfiles (`profiles`) y archivos de sobreescritura.
+- Organización de proyectos Compose más grandes: división y reutilización de archivos.

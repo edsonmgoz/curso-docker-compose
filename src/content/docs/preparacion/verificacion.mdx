@@ -1,0 +1,63 @@
+---
+title: Verificación del entorno
+description: Comprobación de Docker y Docker Compose, inicio de sesión en Docker Hub y descarga previa de las imágenes del curso.
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+Estas comprobaciones se ejecutan en la terminal del sistema: Ubuntu (WSL) en Windows, Terminal en
+macOS y la terminal habitual en Linux. En Windows y macOS, Docker Desktop debe estar iniciado.
+
+<Steps>
+
+1. Comprobar que el cliente se comunica con el daemon. La salida debe mostrar dos bloques, `Client`
+   y `Server`. Si falta `Server`, Docker Desktop no está iniciado o el servicio no está activo.
+
+   ```bash
+   docker version
+   ```
+
+2. Comprobar que Docker Compose está disponible:
+
+   ```bash
+   docker compose version
+   ```
+
+3. Ejecutar el primer contenedor. Docker descarga la imagen, crea el contenedor, imprime un mensaje
+   de bienvenida y lo elimina al terminar gracias a `--rm`:
+
+   ```bash
+   docker run --rm hello-world
+   ```
+
+4. Iniciar sesión en Docker Hub. El comando muestra un código de un solo uso y abre el navegador
+   para confirmarlo; no pide la contraseña en la terminal.
+
+   ```bash
+   docker login
+   ```
+
+   La salida termina con `Login Succeeded`.
+
+5. Descargar con anticipación las imágenes que se usan en clase, para no depender de la conexión
+   durante la sesión:
+
+   ```bash
+   docker pull eclipse-temurin:25-jdk-noble
+   docker pull eclipse-temurin:25-jre-noble
+   docker pull postgres:18.6
+   ```
+
+6. Confirmar que las imágenes quedaron en el equipo:
+
+   ```bash
+   docker images
+   ```
+
+</Steps>
+
+<Aside type="tip" title="Si algo falla">
+	Conviene anotar el comando exacto y copiar el mensaje de error completo, sin resumirlo, para
+	consultarlo en el canal de Discord del curso. Un mensaje de error completo suele bastar para
+	identificar la causa.
+</Aside>

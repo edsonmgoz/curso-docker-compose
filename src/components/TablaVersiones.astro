@@ -1,0 +1,35 @@
+---
+import { sesiones, rutaSitio } from '../data/sesiones';
+
+const versiones = Map.groupBy(sesiones, (sesion) => sesion.versionApi);
+---
+
+<table>
+	<thead>
+		<tr>
+			<th scope="col">Versión</th>
+			<th scope="col">Sesiones</th>
+		</tr>
+	</thead>
+	<tbody>
+		{
+			[...versiones].map(([version, grupo]) => (
+				<tr>
+					<td>
+						<code>{version}</code>
+					</td>
+					<td>
+						{grupo.map((sesion, indice) => (
+							<>
+								{indice > 0 && ', '}
+								<a href={rutaSitio(`sesiones/${sesion.slug}/`)}>
+									{String(sesion.numero).padStart(2, '0')} · {sesion.titulo}
+								</a>
+							</>
+						))}
+					</td>
+				</tr>
+			))
+		}
+	</tbody>
+</table>

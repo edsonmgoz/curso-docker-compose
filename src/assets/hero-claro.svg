@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 360" width="480" height="360" role="img" aria-label="Proyecto del curso: la API y PostgreSQL orquestados con Docker Compose, con un volumen para los datos">
+  <style>
+    @media (prefers-reduced-motion: no-preference) {
+      .pieza { animation: aparecer 480ms cubic-bezier(0.2, 0.7, 0.2, 1) var(--retardo) both; }
+      .pieza--derecha { animation-name: desde-izquierda; }
+      .pieza--abajo { animation-name: desde-arriba; }
+    }
+    @keyframes aparecer { from { opacity: 0; transform: translateY(6px); } }
+    @keyframes desde-izquierda { from { opacity: 0; transform: translateX(-8px); } }
+    @keyframes desde-arriba { from { opacity: 0; transform: translateY(-8px); } }
+  </style>
+  <defs>
+    <filter id="sombra" x="-10%" y="-10%" width="120%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#22364a" flood-opacity="0.10"/>
+    </filter>
+    <marker id="punta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#98a6b5"/>
+    </marker>
+  </defs>
+  <rect x="10" y="10" width="460" height="340" rx="16" fill="#eef2f6"/>
+
+  <g class="pieza" style="--retardo: 0ms">
+  <text x="34" y="44" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="11" font-weight="600" letter-spacing="1.6" fill="#9aa7b5">COMPOSE.YAML</text>
+  </g>
+
+  <g class="pieza" style="--retardo: 120ms">
+  <g filter="url(#sombra)">
+    <rect x="34" y="66" width="186" height="84" rx="10" fill="#ffffff" stroke="#e3e8ef"/>
+  </g>
+  <path d="M44 66h-0a10 10 0 0 0-10 10v64a10 10 0 0 0 10 10h0z" fill="#2e6bc6"/>
+  <rect x="34" y="75" width="4" height="66" fill="#2e6bc6"/>
+  <text x="56" y="102" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="17" font-weight="700" fill="#22364a">catalog-api</text>
+  <text x="56" y="126" font-family="Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" fill="#6b7a8d">spring boot · :8080</text>
+  </g>
+
+  <g class="pieza pieza--derecha" style="--retardo: 320ms">
+  <line x1="222" y1="108" x2="256" y2="108" stroke="#98a6b5" stroke-width="1.6" marker-end="url(#punta)"/>
+  <text x="239" y="98" text-anchor="middle" font-family="Menlo, Consolas, 'Liberation Mono', monospace" font-size="10" fill="#6b7a8d">red</text>
+  </g>
+
+  <g class="pieza" style="--retardo: 420ms">
+  <g filter="url(#sombra)">
+    <rect x="260" y="66" width="186" height="84" rx="10" fill="#ffffff" stroke="#e3e8ef"/>
+  </g>
+  <path d="M270 66h-0a10 10 0 0 0-10 10v64a10 10 0 0 0 10 10h0z" fill="#2f8f83"/>
+  <rect x="260" y="75" width="4" height="66" fill="#2f8f83"/>
+  <text x="282" y="102" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="17" font-weight="700" fill="#22364a">postgres</text>
+  <text x="282" y="126" font-family="Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" fill="#6b7a8d">18.6 · :5432</text>
+  </g>
+
+  <g class="pieza pieza--abajo" style="--retardo: 620ms">
+  <line x1="353" y1="152" x2="353" y2="190" stroke="#98a6b5" stroke-width="1.6" marker-end="url(#punta)"/>
+  </g>
+
+  <g class="pieza" style="--retardo: 700ms">
+  <g filter="url(#sombra)">
+    <rect x="260" y="194" width="186" height="74" rx="10" fill="#ffffff" stroke="#e3e8ef"/>
+  </g>
+  <g fill="none" stroke="#2f8f83" stroke-width="1.6">
+    <ellipse cx="290" cy="220" rx="11" ry="4"/>
+    <path d="M279 220v16a11 4 0 0 0 22 0v-16"/>
+    <path d="M279 228a11 4 0 0 0 22 0"/>
+  </g>
+  <text x="314" y="226" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#22364a">pgdata</text>
+  <text x="314" y="246" font-family="Menlo, Consolas, 'Liberation Mono', monospace" font-size="11" fill="#6b7a8d">volumen nombrado</text>
+  </g>
+
+  <g class="pieza" style="--retardo: 880ms">
+  <g filter="url(#sombra)">
+    <rect x="34" y="194" width="186" height="74" rx="10" fill="#22364a"/>
+  </g>
+  <text x="50" y="220" font-family="Menlo, Consolas, 'Liberation Mono', monospace" font-size="11.5" fill="#d3e2f7">$ docker compose ps</text>
+  </g>
+
+  <g class="pieza" style="--retardo: 1100ms">
+  <text y="240" font-family="Menlo, Consolas, 'Liberation Mono', monospace" font-size="11.5"><tspan x="50" fill="#d3e2f7">api</tspan><tspan x="96" fill="#2f8f83">healthy</tspan></text>
+  </g>
+
+  <g class="pieza" style="--retardo: 1220ms">
+  <text y="257" font-family="Menlo, Consolas, 'Liberation Mono', monospace" font-size="11.5"><tspan x="50" fill="#d3e2f7">db</tspan><tspan x="96" fill="#2f8f83">healthy</tspan></text>
+  </g>
+
+  <g class="pieza" style="--retardo: 1000ms">
+  <line x1="34" y1="296" x2="446" y2="296" stroke="#e3e8ef"/>
+  <text x="34" y="322" font-family="Menlo, Consolas, 'Liberation Mono', monospace" font-size="11" fill="#6b7a8d">un proyecto que crece en cada sesión</text>
+  </g>
+</svg>

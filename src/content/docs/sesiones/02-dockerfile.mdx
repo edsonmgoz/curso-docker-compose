@@ -1,0 +1,20 @@
+---
+title: Construcción de imágenes con Dockerfile
+description: Estructura de un Dockerfile, capas y cache de build, buenas prácticas, multi-stage builds y primera imagen publicada en Docker Hub.
+sesion: 2
+sidebar:
+  label: 02 · Imágenes con Dockerfile
+  order: 2
+---
+
+import SesionCabecera from '../../../components/SesionCabecera.astro';
+
+<SesionCabecera numero={2} />
+
+## En esta sesión
+
+- Estructura de un Dockerfile: `FROM`, `COPY`, `RUN`, `CMD`, `ENTRYPOINT` y `EXPOSE`.
+- Cómo se forman las capas de una imagen y por qué el orden de las instrucciones afecta el cache de build.
+- Buenas prácticas: imágenes base livianas, `.dockerignore` y versionado de tags, sin depender solo de `latest`.
+- Multi-stage builds: separar la etapa de compilación de la etapa de ejecución.
+- Primera imagen de la aplicación del curso y su publicación en Docker Hub.

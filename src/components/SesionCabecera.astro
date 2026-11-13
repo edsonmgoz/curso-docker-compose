@@ -1,0 +1,60 @@
+---
+import { Aside } from '@astrojs/starlight/components';
+import { obtenerSesion, fechaLarga, rutaSitio } from '../data/sesiones';
+
+interface Props {
+	numero: number;
+}
+
+const sesion = obtenerSesion(Astro.props.numero);
+const disponible = sesion.estado === 'disponible';
+const numero = String(sesion.numero).padStart(2, '0');
+const fecha = fechaLarga(sesion);
+---
+
+<div class="cabecera-sesion">
+	<span class="etiqueta-seccion">Sesión {numero} de 10</span>
+	<p class="cabecera-sesion__fecha">
+		<time datetime={`${sesion.fecha}T${sesion.inicio}-04:00`}>
+			{fecha.charAt(0).toUpperCase() + fecha.slice(1)}
+		</time>
+		{' · '}
+		{sesion.inicio} a {sesion.fin}, hora de Bolivia
+	</p>
+	<div class="cabecera-sesion__chips">
+		<span class:list={['chip', { 'chip--exito': disponible }]}>
+			{disponible ? 'Material disponible' : 'Material próximamente'}
+		</span>
+		<a href={rutaSitio('proyecto/')} class="chip chip--acento">catalog-api {sesion.versionApi}</a>
+	</div>
+</div>
+
+{
+	!disponible && (
+		<Aside title="Material en preparación">
+			Los comandos, la práctica guiada, los errores frecuentes y los recursos de esta sesión se
+			publican a medida que avanza el curso. Mientras tanto, esta página resume lo que cubre según el
+			programa.
+		</Aside>
+	)
+}
+
+<style>
+	.cabecera-sesion {
+		padding: 1rem 1.25rem;
+		border: 1px solid var(--curso-borde);
+		border-left: 3px solid var(--sl-color-accent);
+		border-radius: 0.5rem;
+		background: var(--curso-panel);
+	}
+	.cabecera-sesion__fecha {
+		margin: 0.25rem 0 0.75rem;
+		color: var(--sl-color-white);
+	}
+	.cabecera-sesion__chips {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		align-items: center;
+	}
+</style>

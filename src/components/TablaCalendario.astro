@@ -1,0 +1,30 @@
+---
+import { sesiones, fechaCorta, rutaSitio } from '../data/sesiones';
+---
+
+<table>
+	<thead>
+		<tr>
+			<th scope="col">Sesión</th>
+			<th scope="col">Fecha y horario</th>
+			<th scope="col">Tema</th>
+		</tr>
+	</thead>
+	<tbody>
+		{
+			sesiones.map((sesion) => (
+				<tr>
+					<td>{String(sesion.numero).padStart(2, '0')}</td>
+					<td>
+						<time datetime={`${sesion.fecha}T${sesion.inicio}-04:00`}>{fechaCorta(sesion)}</time>
+						<br />
+						{sesion.inicio} a {sesion.fin}
+					</td>
+					<td>
+						<a href={rutaSitio(`sesiones/${sesion.slug}/`)}>{sesion.titulo}</a>
+					</td>
+				</tr>
+			))
+		}
+	</tbody>
+</table>

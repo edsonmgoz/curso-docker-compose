@@ -1,0 +1,63 @@
+---
+title: Contenedores con Docker y orquestación con Docker Compose
+description: Sitio del programa experto. Preparación del entorno, material por sesión, comandos, proyecto del curso y recursos en un solo lugar.
+template: splash
+hero:
+  title: Contenedores con Docker y orquestación con Docker Compose
+  tagline: Diez sesiones en vivo para construir imágenes eficientes, orquestar servicios con Docker Compose, proteger credenciales y resolver fallas habituales sobre una aplicación Spring Boot con PostgreSQL.
+  image:
+    light: ../../assets/hero-claro.svg
+    dark: ../../assets/hero-oscuro.svg
+    alt: Proyecto del curso, con la API y PostgreSQL orquestados con Docker Compose y un volumen para los datos
+  actions:
+    - text: Preparar el entorno
+      link: /curso-docker-compose/preparacion/instalacion/
+      icon: right-arrow
+    - text: Ver las sesiones
+      link: '#ruta-del-programa'
+      variant: minimal
+---
+
+import { Card, CardGrid, LinkCard, Steps } from '@astrojs/starlight/components';
+import RutaCurso from '../../components/RutaCurso.astro';
+
+## Qué incluye el sitio
+
+<CardGrid>
+	<Card title="Material por sesión" icon="open-book">
+		Conceptos clave, comandos listos para copiar, práctica guiada, errores frecuentes y
+		documentación oficial de cada clase.
+	</Card>
+	<Card title="Proyecto del curso" icon="puzzle">
+		Una API Spring Boot con PostgreSQL, construida con buenas prácticas, que se conteneriza y evoluciona sesión a sesión. No hace falta programar en Java.
+	</Card>
+	<Card title="Criterio de producción" icon="approve-check">
+		Cada tema se explica desde la experiencia de operar contenedores en un entorno real, no solo
+		desde la documentación.
+	</Card>
+	<Card title="Referencia rápida" icon="list-format">
+		Todo el material queda reunido en este sitio, con buscador, para consultar comandos y conceptos durante el curso y después.
+	</Card>
+</CardGrid>
+
+## Ruta del programa
+
+Diez sesiones de tres horas, en vivo y en hora de Bolivia. Cada sesión cuenta con su propio material en este sitio.
+
+<RutaCurso />
+
+## Primeros pasos
+
+<Steps>
+
+1. Instalar Docker siguiendo la [guía de instalación](/curso-docker-compose/preparacion/instalacion/).
+2. Comprobar que todo funciona con la [verificación del entorno](/curso-docker-compose/preparacion/verificacion/), que incluye el inicio de sesión en Docker Hub y la descarga previa de imágenes.
+3. Unirse al canal de Discord del curso con la invitación recibida por correo. Los detalles están en [Comunidad](/curso-docker-compose/comunidad/).
+
+</Steps>
+
+<LinkCard
+	title="Calendario completo"
+	description="Fechas, horarios y temas de las diez sesiones."
+	href="/curso-docker-compose/calendario/"
+/>

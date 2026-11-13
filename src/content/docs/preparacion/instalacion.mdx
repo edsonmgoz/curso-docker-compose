@@ -1,0 +1,197 @@
+---
+title: Guía de instalación
+description: Requisitos e instalación de Docker en Windows con WSL 2, macOS y Linux, y cuenta de Docker Hub.
+---
+
+import { Aside, Steps, Tabs, TabItem } from '@astrojs/starlight/components';
+
+Esta guía es el punto de partida del curso y conviene revisarla al comenzar. Sus pasos se repasan en la sesión 1 y quedan aquí como referencia para retomarlos en cualquier momento. Después se continúa con la [verificación del entorno](/curso-docker-compose/preparacion/verificacion/).
+
+## Requisitos generales
+
+- Computador con al menos 8 GB de RAM (se recomiendan 16 GB) y virtualización habilitada en el
+  BIOS/UEFI.
+- Conexión estable a internet.
+- Docker Desktop (Windows y macOS) o Docker Engine (Linux).
+- Un editor de código. Se recomienda [Visual Studio Code](https://code.visualstudio.com/).
+- Una cuenta gratuita en [Docker Hub](https://hub.docker.com/).
+
+<Aside type="caution" title="Licencia de Docker Desktop">
+	Docker Desktop es gratuito para uso personal, educación, proyectos open source no comerciales y
+	empresas con menos de 250 empleados y menos de USD 10 millones de ingresos anuales. Su uso
+	profesional en organizaciones más grandes o en entidades de gobierno requiere una suscripción
+	paga. Antes de instalarlo en un equipo de trabajo conviene revisar las [condiciones
+	vigentes](https://docs.docker.com/subscription/desktop-license/). Docker Engine en Linux no
+	tiene esta restricción.
+</Aside>
+
+## Instalación por sistema operativo
+
+La pestaña elegida se recuerda en todas las páginas del sitio.
+
+<Tabs syncKey="so">
+<TabItem label="Windows">
+
+Docker Desktop en Windows ejecuta los contenedores sobre WSL 2 (Windows Subsystem for Linux).
+
+**Requisitos según la documentación oficial:**
+
+- Windows 11 de 64 bits, versión 23H2 (build 22631) o superior, o Windows 10 de 64 bits, versión
+  22H2 (build 19045).
+- WSL 2.1.5 o superior.
+- Procesador de 64 bits con SLAT y virtualización habilitada en el BIOS/UEFI.
+
+La documentación lista las ediciones Enterprise, Pro y Education, y aclara que las ediciones Home y
+Education solo ejecutan contenedores Linux. El curso trabaja solo con contenedores Linux.
+
+<Steps>
+
+1. Abrir PowerShell como administrador e instalar WSL. El comando instala también la distribución
+   Ubuntu, que se usa como terminal del curso:
+
+   ```powershell
+   wsl --install
+   ```
+
+   Reiniciar el equipo cuando lo solicite y, al abrir Ubuntu por primera vez, crear un usuario y
+   una contraseña de Linux.
+
+2. Actualizar WSL y comprobar que la versión sea 2.1.5 o superior:
+
+   ```powershell
+   wsl --update
+   wsl --version
+   ```
+
+3. Descargar el instalador desde la [página oficial de Docker Desktop para
+   Windows](https://docs.docker.com/desktop/setup/install/windows-install/) y ejecutarlo con las
+   opciones por defecto. Si aparece la opción **Use WSL 2 instead of Hyper-V**, dejarla marcada.
+
+4. Iniciar Docker Desktop desde el menú de inicio (no arranca solo después de instalarse) y aceptar
+   los términos de uso.
+
+5. En Docker Desktop, entrar a **Settings > Resources > WSL Integration**, activar la integración
+   con Ubuntu y presionar **Apply**.
+
+</Steps>
+
+<Aside type="tip" title="Dónde trabajar en Windows">
+	Los comandos del curso se ejecutan en la terminal de Ubuntu (WSL), no en PowerShell. Los proyectos
+	se guardan dentro del sistema de archivos de Linux, por ejemplo en `~/curso`, y no en
+	`/mnt/c/...`. Docker lo recomienda por dos motivos: el acceso a los archivos es mucho más rápido y
+	los contenedores reciben los eventos de cambio de archivos, de los que depende la recarga
+	automática que se ve en la sesión 5.
+</Aside>
+
+</TabItem>
+<TabItem label="macOS">
+
+Docker Desktop admite la versión actual de macOS y las dos versiones mayores anteriores.
+
+<Steps>
+
+1. Identificar el procesador del equipo: menú Apple > **Acerca de esta Mac**. "Chip Apple M…"
+   corresponde a Apple silicon; "Procesador Intel…" corresponde a Intel.
+
+2. Descargar `Docker.dmg` para ese procesador desde la [página oficial de Docker Desktop para
+   Mac](https://docs.docker.com/desktop/setup/install/mac-install/).
+
+3. Abrir el archivo, arrastrar Docker a la carpeta **Aplicaciones** e iniciarlo desde ahí.
+
+4. Aceptar los términos de uso. Docker Desktop no se ejecuta sin esa aceptación.
+
+5. Solo en Apple silicon, de forma opcional: Docker recomienda instalar Rosetta 2, que algunas
+   herramientas de línea de comandos todavía necesitan.
+
+   ```bash
+   softwareupdate --install-rosetta
+   ```
+
+</Steps>
+
+</TabItem>
+<TabItem label="Linux">
+
+En Linux se instala Docker Engine directamente, sin máquina virtual intermedia. Los pasos siguientes
+corresponden a Ubuntu 22.04, 24.04 y 26.04 LTS. Para otras distribuciones se sigue la [guía oficial
+de cada una](https://docs.docker.com/engine/install/).
+
+<Steps>
+
+1. Desinstalar los paquetes no oficiales que entran en conflicto con Docker Engine. Si ninguno está
+   instalado, es normal ver varios mensajes `no packages found matching`:
+
+   ```bash
+   sudo apt remove $(dpkg --get-selections docker.io docker-compose docker-compose-v2 docker-doc docker-buildx podman-docker containerd runc | cut -f1)
+   ```
+
+2. Configurar el repositorio oficial de Docker:
+
+   ```bash
+   sudo apt update
+   sudo apt install ca-certificates curl
+   sudo install -m 0755 -d /etc/apt/keyrings
+   sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+   sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+   sudo tee /etc/apt/sources.list.d/docker.sources <<EOF
+   Types: deb
+   URIs: https://download.docker.com/linux/ubuntu
+   Suites: $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}")
+   Components: stable
+   Architectures: $(dpkg --print-architecture)
+   Signed-By: /etc/apt/keyrings/docker.asc
+   EOF
+
+   sudo apt update
+   ```
+
+3. Instalar Docker Engine, Buildx y el plugin de Compose:
+
+   ```bash
+   sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+   ```
+
+4. Permitir que el usuario actual use Docker sin `sudo`, y cerrar y volver a abrir la sesión para que
+   el cambio tenga efecto. Si no se aplica, reiniciar el equipo:
+
+   ```bash
+   sudo usermod -aG docker $USER
+   ```
+
+</Steps>
+
+<Aside type="caution" title="El grupo docker equivale a root">
+	Pertenecer al grupo `docker` otorga privilegios equivalentes a los de root sobre el equipo. Es
+	aceptable en un equipo personal de estudio; en un servidor compartido se evalúa con más cuidado.
+	La sesión 8 vuelve sobre el principio de mínimo privilegio.
+</Aside>
+
+</TabItem>
+</Tabs>
+
+## Cuenta de Docker Hub
+
+Docker Hub es el registro donde se buscan las imágenes oficiales y donde se publica la primera
+imagen propia en la sesión 2.
+
+<Steps>
+
+1. Crear una cuenta gratuita (plan Personal) en [hub.docker.com](https://hub.docker.com/).
+2. Confirmar el correo electrónico.
+3. Guardar el nombre de usuario: forma parte del nombre de las imágenes que se publican.
+
+</Steps>
+
+<Aside title="Por qué iniciar sesión desde el primer día">
+	Docker Hub limita las descargas de imágenes: 100 cada 6 horas sin iniciar sesión, contadas por
+	dirección IP, y 200 cada 6 horas con una cuenta Personal. En una red compartida, como la de una
+	oficina, el límite anónimo se reparte entre todos los equipos de esa red. Con la sesión iniciada,
+	el límite es propio. Fuente: [Docker Hub usage and limits](https://docs.docker.com/docker-hub/usage/).
+</Aside>
+
+## Opcional: JDK 25
+
+No es necesario para el curso: la API se compila dentro de contenedores a partir de la sesión 2.
+Solo quien quiera ejecutar la API directamente en su equipo, como se muestra en la sesión 1, necesita
+un JDK 25, por ejemplo [Eclipse Temurin 25](https://adoptium.net/).

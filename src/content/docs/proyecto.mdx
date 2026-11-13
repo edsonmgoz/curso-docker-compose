@@ -1,0 +1,50 @@
+---
+title: Proyecto
+description: catalog-api, la API Spring Boot con PostgreSQL que se conteneriza y orquesta a lo largo del programa.
+---
+
+import { Aside } from '@astrojs/starlight/components';
+import TablaVersiones from '../../components/TablaVersiones.astro';
+
+`catalog-api` es una API REST de catálogo de productos, desarrollada con Java 25 y Spring Boot 4.
+Es la aplicación sobre la que se trabaja en todo el programa: se empaqueta en una imagen en la
+sesión 2, se conecta a PostgreSQL, se orquesta con Docker Compose, se asegura y se diagnostica, y
+se revisa completa en la sesión 10.
+
+<Aside title="No hace falta programar en Java">
+	La API se entrega terminada. El trabajo del curso está en su contenerización, su configuración y
+	su operación, no en su código.
+</Aside>
+
+## Una versión por etapa del curso
+
+La API evoluciona junto con el curso. Cada versión agrega lo que necesita la sesión siguiente, como
+la conexión a PostgreSQL o el endpoint de salud, y contiene la solución de la sesión anterior. Cada
+versión se descarga como archivo `.zip` desde la página de *releases* del repositorio, sin necesidad
+de usar Git.
+
+<TablaVersiones />
+
+## Endpoints
+
+| Método | Ruta | Descripción |
+|---|---|---|
+| GET | `/api/products` | Lista los productos |
+| GET | `/api/products/{id}` | Obtiene un producto |
+| POST | `/api/products` | Crea un producto |
+| PUT | `/api/products/{id}` | Actualiza un producto |
+| DELETE | `/api/products/{id}` | Elimina un producto |
+
+Con la API en ejecución en el puerto 8080, Swagger UI queda disponible en
+`http://localhost:8080/swagger-ui.html` y permite probar todos los endpoints desde el navegador.
+
+## Componentes
+
+| Componente | Versión |
+|---|---|
+| Java | 25 (Eclipse Temurin) |
+| Spring Boot | 4.1.2 |
+| Gradle (wrapper incluido) | 9.8.2 |
+| PostgreSQL | 18.6, desde la versión 0.2.0 de la API |
+
+Repositorio: [github.com/edsonmgoz/catalog-api](https://github.com/edsonmgoz/catalog-api).

@@ -1,0 +1,20 @@
+---
+title: Construcción avanzada y optimización de imágenes
+description: Multi-stage builds en profundidad, BuildKit y docker buildx, cache de dependencias, optimización de imágenes Java y elección de la imagen base.
+sesion: 6
+sidebar:
+  label: 06 · Optimización de imágenes
+  order: 6
+---
+
+import SesionCabecera from '../../../components/SesionCabecera.astro';
+
+<SesionCabecera numero={6} />
+
+## En esta sesión
+
+- Multi-stage builds en profundidad: separar compilación, pruebas y ejecución.
+- BuildKit y `docker buildx`: qué aportan frente al build tradicional.
+- Cache de dependencias durante el build (Maven o Gradle; el proyecto del curso usa Gradle) para reducir los tiempos de construcción.
+- Optimización de imágenes para aplicaciones Java: tamaño, orden de capas y uso de memoria de la JVM dentro de contenedores.
+- Elección de la imagen base (completa, slim, alpine o distroless) y sus implicaciones.
